@@ -1,5 +1,3 @@
-import Link from "next/link";
-import { IoAdd } from "react-icons/io5";
 
 const Breadcrumb = ({
   pageName,
