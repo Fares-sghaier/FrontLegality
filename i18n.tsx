@@ -15,7 +15,7 @@ i18n
     supportedLngs: Languages, // supported languages
 
     backend: {
-      loadPath: '/locales/{{lng}}/{{ns}}.json', // path to translations
+      loadPath: 'locales/{{lng}}/{{ns}}.json', // path to translations
     },
 
     interpolation: {
