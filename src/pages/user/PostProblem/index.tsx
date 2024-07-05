@@ -53,7 +53,7 @@ const PostProblem = () => {
     const fetchProfile = async () => {
       try {
         const response = await axios.get<{ user: User }>(
-          "http://localhost:5000/users/profile",
+          "https://legality-back-production.up.railway.app/users/profile",
           { withCredentials: true },
         );
         setUser(response.data.user);
@@ -121,7 +121,7 @@ const PostProblem = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:5000/projects",
+        "https://legality-back-production.up.railway.app/projects",
         formData,
       );
       console.log(response.data);

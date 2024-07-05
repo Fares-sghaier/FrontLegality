@@ -17,7 +17,7 @@ const ResetPassword = () => {
   useEffect(() => {
     const checkTokenExpiration = async () => {
       try {
-        await axios.post('http://localhost:5000/users/checktokenexpiration', { token }); // Endpoint pour vérifier l'expiration du token
+        await axios.post('https://legality-back-production.up.railway.app/users/checktokenexpiration', { token }); // Endpoint pour vérifier l'expiration du token
       } catch (error) {
         // Si le token est expiré, rediriger vers la page expired_reset_password
         router.push('http://localhost:3000/expired_reset_password');
@@ -60,7 +60,7 @@ const ResetPassword = () => {
       return;
     }
     try {
-      const response = await axios.post('http://localhost:5000/users/resetpassword', { token, password });
+      const response = await axios.post('https://legality-back-production.up.railway.app/users/resetpassword', { token, password });
       setMessage(response.data.message);
       // Rediriger vers la page de connexion après réinitialisation réussie
       router.push('http://localhost:3000/signin');

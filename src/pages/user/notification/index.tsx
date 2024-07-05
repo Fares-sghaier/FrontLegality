@@ -50,7 +50,7 @@ const UserInvitationsPage = ( { fetchPendingInvitations }) => {
     const fetchProfile = async () => {
       try {
         const response = await axios.get<{ user: User }>(
-          "http://localhost:5000/users/profile",
+          "https://legality-back-production.up.railway.app/users/profile",
           { withCredentials: true }
         );
         setUser(response.data.user);
@@ -67,7 +67,7 @@ const UserInvitationsPage = ( { fetchPendingInvitations }) => {
     const fetchInvitations = async () => {
       try {
         if (user) {
-          const response = await axios.post('http://localhost:5000/users/invitations', { id_user: user.id_user });
+          const response = await axios.post('https://legality-back-production.up.railway.app/users/invitations', { id_user: user.id_user });
           setInvitations(response.data.invitations);
           setNotificationsLoaded(true); // Mark notifications as loaded
 
@@ -84,7 +84,7 @@ const UserInvitationsPage = ( { fetchPendingInvitations }) => {
 
   const handleAcceptInvitation = async (projectId: number, sendingUserId: number,inviteduserid: number) => {
     try {
-      await axios.post("http://localhost:5000/projects/acceptinvitationbyuserinvited", {
+      await axios.post("https://legality-back-production.up.railway.app/projects/acceptinvitationbyuserinvited", {
         id_user: sendingUserId,
         id_project: projectId,
         invited_user_id: inviteduserid,
@@ -102,7 +102,7 @@ const UserInvitationsPage = ( { fetchPendingInvitations }) => {
   }, [user]);
   const handleRejectInvitation = async (projectId: number, sendingUserId: number) => {
     try {
-      await axios.post("http://localhost:5000/projects/deleteinvitationbyuserinvited", {
+      await axios.post("https://legality-back-production.up.railway.app/projects/deleteinvitationbyuserinvited", {
         id_user: sendingUserId,
         id_project: projectId,
       });

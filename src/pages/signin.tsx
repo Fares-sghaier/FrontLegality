@@ -54,7 +54,7 @@ const SigninPage = () => {
     }
 
     try {
-      const response = await axios.post("http://localhost:5000/users/login", {
+      const response = await axios.post("https://legality-back-production.up.railway.app/users/login", {
         email_user,
         password_user,
       });
@@ -77,7 +77,7 @@ const SigninPage = () => {
   };
 
   const handleSignInGoogle = () => {
-    window.location.href = "http://localhost:5000/auth/google"; // Redirect to Google sign-in
+    window.location.href = "https://legality-back-production.up.railway.app/auth/google"; // Redirect to Google sign-in
   };
 
   // Sticky Navbar

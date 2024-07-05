@@ -42,7 +42,7 @@ const ForgotPassword = () => {
       return; // Stop submission if form is not valid
     }
     try {
-      await axios.post('http://localhost:5000/users/forgotpassword', { email });
+      await axios.post('https://legality-back-production.up.railway.app/users/forgotpassword', { email });
       setMessage('Password reset email sent successfully. Please check your email!');
     } catch (error) {
       if (error.response && error.response.status === 402) {

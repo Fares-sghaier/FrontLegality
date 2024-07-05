@@ -6,7 +6,7 @@ const Signout = () => {
 
   const handleLogout = () => {
     // Mettre en œuvre la déconnexion de l'utilisateur ici
-    router.push('http://localhost:5000/signout');
+    router.push('https://legality-back-production.up.railway.app/signout');
   };
 
   return (

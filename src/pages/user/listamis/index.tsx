@@ -6,7 +6,7 @@ import io from 'socket.io-client';
 import { RiSendPlaneFill } from 'react-icons/ri';
 import '../../Chat.css'; // Import the CSS file
 
-const socket = io('http://localhost:5000');
+const socket = io('https://legality-back-production.up.railway.app');
 
 interface User {
   id_user: string;
@@ -75,7 +75,7 @@ const FriendsList = () => {
     const fetchProfile = async () => {
       try {
         const response = await axios.get<{ user: User }>(
-          "http://localhost:5000/users/profile",
+          "https://legality-back-production.up.railway.app/users/profile",
           { withCredentials: true },
         );
         setUser(response.data.user);
@@ -99,7 +99,7 @@ const FriendsList = () => {
     const fetchFriends = async () => {
       try {
         if (user) {
-          const response = await axios.post('http://localhost:5000/users/friends', { id_user: user.id_user });
+          const response = await axios.post('https://legality-back-production.up.railway.app/users/friends', { id_user: user.id_user });
           setFriends(response.data.invitations);
           const lastMessagesPromises = response.data.invitations.map(async (friend) => {
             const friendId = user.id_user === friend.sending_user_id ? friend.invited_user_id : friend.sending_user_id;
@@ -120,7 +120,7 @@ const FriendsList = () => {
 
   const fetchMessages = async (friendId: string) => {
     try {
-      const response = await axios.post('http://localhost:5000/messages/get-messages-by-participants', {
+      const response = await axios.post('https://legality-back-production.up.railway.app/messages/get-messages-by-participants', {
         participant1Id: user?.id_user,
         participant2Id: friendId,
       });
@@ -157,7 +157,7 @@ const FriendsList = () => {
   const sendMessage = async (friendId: string, text: string) => {
     try {
       // Envoie la requête pour créer un nouveau message
-      const response = await axios.post('http://localhost:5000/messages/create-new-message', {
+      const response = await axios.post('https://legality-back-production.up.railway.app/messages/create-new-message', {
         sender: user?.id_user,
         participant2_id: friendId,
         text: text,
@@ -174,7 +174,7 @@ const FriendsList = () => {
 
   const getLastMessage = async (userId: string, friendId: string) => {
     try {
-      const response = await axios.post('http://localhost:5000/messages/get-last-message', {
+      const response = await axios.post('https://legality-back-production.up.railway.app/messages/get-last-message', {
         participant1Id: userId,
         participant2Id: friendId,
       });

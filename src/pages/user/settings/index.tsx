@@ -51,7 +51,7 @@ const UpdateUserForm = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/users/profile', { withCredentials: true });
+        const response = await axios.get('https://legality-back-production.up.railway.app/users/profile', { withCredentials: true });
         setUser(response.data.user);
         // Pré-remplir les champs du formulaire avec les données de l'utilisateur
         setFormData({
