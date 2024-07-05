@@ -7,7 +7,7 @@ const nextConfig = {
     // !! WARN !!
     ignoreBuildErrors: true,
   },
-  reactStrictMode: true,
+  reactStrictMode: false,
   transpilePackages: [
     'rc-util',
     '@ant-design',
