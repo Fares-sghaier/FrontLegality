@@ -9,7 +9,7 @@ const ExpiredResetPasswordPage = () => {
   useEffect(() => {
     // Rediriger vers la page de demande de réinitialisation du mot de passe après quelques secondes
     const redirectTimer = setTimeout(() => {
-      router.push('http://localhost:3000/forgot');
+      router.push('https://front-legality.vercel.app/forgot');
     }, 5000); // Rediriger après 5 secondes
 
     // Nettoyer le timer lors du démontage du composant
