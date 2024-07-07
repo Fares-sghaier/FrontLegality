@@ -51,4 +51,6 @@ const ActivationPage = () => {
   );
 };
 
+
+
 export default ActivationPage;

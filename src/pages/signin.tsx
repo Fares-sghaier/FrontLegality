@@ -1,5 +1,5 @@
 import Link from "next/link";
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { Metadata } from "next";
 import Layout from "../app/layoutsign";
@@ -19,7 +19,7 @@ const SigninPage = () => {
   const [password_user, setPassword_user] = useState("");
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const { t } = useTranslation()
+  const { t } = useTranslation();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -27,21 +27,21 @@ const SigninPage = () => {
   }, []);
   const validateForm = () => {
     if (email_user.length < 1 && password_user.length > 1) {
-      setError(t('common.emailError'));
+      setError(t("common.emailError"));
       return false;
     }
-   
+
     if (email_user.length > 1 && password_user.length < 1) {
-      setError(t('common.passwordError'));
+      setError(t("common.passwordError"));
       return false;
     }
     if (email_user.length < 1 && password_user.length < 1) {
-      setError(t('common.requireError'));
+      setError(t("common.requireError"));
       return false;
     }
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email_user)) {
-      setError(t('common.validEmailError'));
+      setError(t("common.validEmailError"));
       return false;
     }
     return true;
@@ -54,10 +54,14 @@ const SigninPage = () => {
     }
 
     try {
-      const response = await axios.post("https://legality-back-production.up.railway.app/users/login", {
-        email_user,
-        password_user,
-      });
+      const response = await axios.post(
+        "https://legality-back-production.up.railway.app/users/login",
+        {
+          email_user,
+          password_user,
+        },
+        { withCredentials: true },
+      );
       // Stocker le token JWT dans le cookie
       document.cookie = `jwt=${response.data.token}; path=/`;
       router.push("/user");
@@ -77,7 +81,8 @@ const SigninPage = () => {
   };
 
   const handleSignInGoogle = () => {
-    window.location.href = "https://legality-back-production.up.railway.app/auth/google"; // Redirect to Google sign-in
+    window.location.href =
+      "https://legality-back-production.up.railway.app/auth/google"; // Redirect to Google sign-in
   };
 
   // Sticky Navbar
@@ -101,25 +106,21 @@ const SigninPage = () => {
       >
         <div className="container">
           <div className="relative -mx-4 flex items-center justify-between">
-            <Link
-              href="/"
-             className="absolute top--3 left--10 pt-20 pr-20"
-            >
-             <Image
+            <Link href="/" className="absolute left--10 top--3 pr-20 pt-20">
+              <Image
                 src="/images/logo/semicircle.webp"
                 alt="logo"
-              width={60}
-              height={50}
-              className="dark:hidden"
-            />
-            <Image
+                width={60}
+                height={50}
+                className="dark:hidden"
+              />
+              <Image
                 src="/images/logo/semicircle.webp"
                 alt="logo"
-              width={80}
-              height={50}
-              className="hidden dark:block"
-            />
-          
+                width={80}
+                height={50}
+                className="hidden dark:block"
+              />
             </Link>
           </div>
         </div>
@@ -132,7 +133,7 @@ const SigninPage = () => {
         <div className="container mx-auto max-w-md rounded-lg border border-gray-300 px-4">
           <div className="mx-auto rounded-lg bg-white p-4 py-6">
             <h2 className="mb-8 mt-6 text-center text-3xl text-gray-900">
-            {mounted ? t('common.loginAccount') : 'Loading...'}
+              {mounted ? t("common.loginAccount") : "Loading..."}
             </h2>
             <button
               onClick={handleSignInGoogle}
@@ -171,7 +172,7 @@ const SigninPage = () => {
                   </defs>
                 </svg>
               </span>
-              {mounted ? t('common.signInGoogle') : 'Loading...'}
+              {mounted ? t("common.signInGoogle") : "Loading..."}
             </button>
             {/* Formulaire de connexion */}
             <form className="space-y-6" onSubmit={handleLogin}>
@@ -208,13 +209,17 @@ const SigninPage = () => {
                   htmlFor="email_user"
                   className="block text-sm text-dark dark:text-white"
                 >
-                  {mounted ? t('common.email') : 'Loading...'}
+                  {mounted ? t("common.email") : "Loading..."}
                 </label>
                 <div className="relative">
                   <input
                     type="text"
                     name="email_user"
-                    placeholder= {i18n.language==='fr'? 'Entrer votre e-mail' : 'Enter your email'} 
+                    placeholder={
+                      i18n.language === "fr"
+                        ? "Entrer votre e-mail"
+                        : "Enter your email"
+                    }
                     value={email_user}
                     className={`border-stroke w-full rounded-sm border px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:text-body-color-dark dark:shadow-two dark:focus:border-primary dark:focus:shadow-none ${
                       error && "border-red-500" // Ajout de la classe border-red-500 si une erreur est présente
@@ -231,19 +236,22 @@ const SigninPage = () => {
                   htmlFor="password_user"
                   className="block text-sm text-dark dark:text-white"
                 >
-                                    {mounted ? t('common.password') : 'Loading...'}
-
+                  {mounted ? t("common.password") : "Loading..."}
                 </label>
                 <div className="relative">
                   <input
                     type={showPassword ? "text" : "password"}
                     name="password_user"
-                    placeholder= {i18n.language==='fr'? 'Entrer votre mot de passe' : 'Enter your password'} 
+                    placeholder={
+                      i18n.language === "fr"
+                        ? "Entrer votre mot de passe"
+                        : "Enter your password"
+                    }
                     value={password_user}
                     className={`border-stroke w-full rounded-sm border px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:text-body-color-dark dark:shadow-two dark:focus:border-primary dark:focus:shadow-none ${
                       error && "border-red-500" // Ajout de la classe border-red-500 si une erreur est présente
-                    }`}               
-                         onChange={(e) => setPassword_user(e.target.value)}
+                    }`}
+                    onChange={(e) => setPassword_user(e.target.value)}
                   />
                   <span className="absolute inset-y-0 left-0 flex items-center pl-2">
                     <FiLock className="mr-2" />
@@ -287,8 +295,8 @@ const SigninPage = () => {
                       </span>
                     </div>
                   </div>
-                  {mounted ? t('common.keepSignIn') : 'Loading...'}
-                  </label>
+                  {mounted ? t("common.keepSignIn") : "Loading..."}
+                </label>
               </div>
 
               {/* Bouton de connexion */}
@@ -297,7 +305,7 @@ const SigninPage = () => {
                   type="submit"
                   className="flex w-full items-center justify-center rounded-sm bg-primary px-9 py-4 text-base font-medium text-white shadow-submit duration-300 hover:bg-primary/90 dark:shadow-submit-dark"
                 >
-                 {mounted ? t('common.signIn') : 'Loading...'}
+                  {mounted ? t("common.signIn") : "Loading..."}
                 </button>
               </div>
             </form>
@@ -307,14 +315,14 @@ const SigninPage = () => {
                 href="/forgot"
                 className="cursor-pointer text-primary hover:underline"
               >
-                {mounted ? t('common.forgotPassword') : 'Loading...'}
+                {mounted ? t("common.forgotPassword") : "Loading..."}
               </Link>
             </p>
             {/* Sign up link */}
             <p className="text-center text-base font-medium text-body-color">
-            {mounted ? t('common.noAccount') : 'Loading...'}{" "}
+              {mounted ? t("common.noAccount") : "Loading..."}{" "}
               <Link href="/signup" className="text-primary hover:underline">
-              {mounted ? t('common.signUp') : 'Loading...'}
+                {mounted ? t("common.signUp") : "Loading..."}
               </Link>
             </p>
           </div>
