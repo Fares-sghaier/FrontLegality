@@ -17,7 +17,7 @@ const Profile = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const response = await axios.get('https://legality-back-production.up.railway.app/users/profile', { withCredentials: true });
+        const response = await axios.get('http://localhost:5000/users/profile', { withCredentials: true });
         setUser(response.data.user);
       } catch (error) {
         router.push('/signin');
@@ -29,7 +29,7 @@ const Profile = () => {
 
   const handleLogout = async () => {
     try {
-      await axios.post('https://legality-back-production.up.railway.app/users/logout', {}, { withCredentials: true });
+      await axios.post('http://localhost:5000/users/logout', {}, { withCredentials: true });
       document.cookie = 'jwt=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT';
       router.push('/signin');
     } catch (error) {
@@ -101,7 +101,7 @@ const Profile = () => {
       return;
     }
     try {
-      const response = await axios.put(`https://legality-back-production.up.railway.app/users/changePassword/${user.id_user}`, {
+      const response = await axios.put(`http://localhost:5000/users/changePassword/${user.id_user}`, {
         oldPassword,
         newPassword,
       });
@@ -128,7 +128,7 @@ const Profile = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const response = await axios.get('https://legality-back-production.up.railway.app/users/profile', { withCredentials: true });
+        const response = await axios.get('http://localhost:5000/users/profile', { withCredentials: true });
         setUser1(response.data.user);
         // Pré-remplir les champs du formulaire avec les données de l'utilisateur
         setFormData({

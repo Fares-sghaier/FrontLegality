@@ -142,7 +142,7 @@ const Dashboard = () => {
   const [showText, setShowText] = useState(true);
   const [showMoreComments, setShowMoreComments] = useState<boolean>(false);
   const [likeCounts, setLikeCounts] = useState({});
-  const socket = io("https://legality-back-production.up.railway.app");
+  const socket = io("http://localhost:5000");
   const [searchTerm, setSearchTerm] = useState("");
   const[valueSearch,setValueSearch] = useState("")
   const [showOptions, setShowOptions] = useState(false);
@@ -194,7 +194,7 @@ useEffect(() => {
     try {
       if (filterBy && filterValue.trim() !== "") {
         const response = await axios.post(
-          "https://legality-back-production.up.railway.app/projects/filter",
+          "http://localhost:5000/projects/filter",
           { filterBy, filterValue },
         );
 
@@ -211,7 +211,7 @@ useEffect(() => {
                 project.id_project,
               );
               const isLikedResponse = await axios.post(
-                "https://legality-back-production.up.railway.app/projects/isLiked",
+                "http://localhost:5000/projects/isLiked",
                 {
                   id_project: project.id_project,
                   id_user: user?.id_user,
@@ -219,7 +219,7 @@ useEffect(() => {
               );
               // Ajout de la récupération du statut de l'invitation
               const invitationResponse = await axios.post(
-                "https://legality-back-production.up.railway.app/projects/invitation",
+                "http://localhost:5000/projects/invitation",
                 {
                   id_project: project.user_id_user,
                   id_user: user?.id_user,
@@ -244,7 +244,7 @@ useEffect(() => {
         }
       } else if (filterValue.trim() === "") {
         const response = await axios.post(
-          "https://legality-back-production.up.railway.app/projects/all",
+          "http://localhost:5000/projects/all",
           {
             country: user?.country_user,
            
@@ -262,7 +262,7 @@ useEffect(() => {
               project.id_project,
             );
             const isLikedResponse = await axios.post(
-              "https://legality-back-production.up.railway.app/projects/isLiked",
+              "http://localhost:5000/projects/isLiked",
               {
                 id_project: project.id_project,
                 id_user: user?.id_user,
@@ -271,7 +271,7 @@ useEffect(() => {
 
             // Ajout de la récupération du statut de l'invitation
             const invitationResponse = await axios.post(
-              "https://legality-back-production.up.railway.app/projects/invitation",
+              "http://localhost:5000/projects/invitation",
               {
                 id_project: project.user_id_user,
                 id_user: user?.id_user,
@@ -307,7 +307,7 @@ useEffect(() => {
   const fetchSearchResults = async () => {
     try {
       const projectsResponse = await axios.post(
-        "https://legality-back-production.up.railway.app/projects/search",
+        "http://localhost:5000/projects/search",
         { name_project: searchTerm },
       );
       if (Array.isArray(projectsResponse.data)) {
@@ -325,7 +325,7 @@ useEffect(() => {
             );
             // Check if user has liked the project
             const isLikedResponse = await axios.post(
-              "https://legality-back-production.up.railway.app/projects/isLiked",
+              "http://localhost:5000/projects/isLiked",
               {
                 id_project: project.id_project,
                 id_user: user?.id_user,
@@ -346,7 +346,7 @@ useEffect(() => {
         const invitationsResponse = await Promise.all(
           projectsWithComments.map(async (project) => {
             const response = await axios.post(
-              "https://legality-back-production.up.railway.app/projects/invitation",
+              "http://localhost:5000/projects/invitation",
               {
                 id_project: project.user_id_user,
                 id_user: user?.id_user,
@@ -387,7 +387,7 @@ useEffect(() => {
   const fetchUserRatings = async (commentId: number) => {
     try {
       const response = await axios.post(
-        "https://legality-back-production.up.railway.app/projects/user-ratings",
+        "http://localhost:5000/projects/user-ratings",
         {
           id_user: user?.id_user,
           id_comment: commentId,
@@ -426,7 +426,7 @@ useEffect(() => {
     try {
       // Envoyer la mise à jour au serveur
       const response = await axios.post(
-        "https://legality-back-production.up.railway.app/projects/add-rating",
+        "http://localhost:5000/projects/add-rating",
         {
           id_comment: commentId,
           id_user: user?.id_user,
@@ -502,7 +502,7 @@ useEffect(() => {
     
     try {
       const response = await axios.post(
-        "https://legality-back-production.up.railway.app/projects/deleteComment",
+        "http://localhost:5000/projects/deleteComment",
         {
           id_comment: commentId,
           id_user: user?.id_user,
@@ -535,7 +535,7 @@ useEffect(() => {
   };
   const handleDeleteClick = async (projectId) => {
     try {
-      const response = await axios.delete("https://legality-back-production.up.railway.app/projects", {
+      const response = await axios.delete("http://localhost:5000/projects", {
         data: {
           id: projectId,
         },
@@ -565,7 +565,7 @@ useEffect(() => {
     const fetchProfile = async () => {
       try {
         const response = await axios.get<{ user: User }>(
-          "https://legality-back-production.up.railway.app/users/profile",
+          "http://localhost:5000/users/profile",
           { withCredentials: true },
         );
         setUser(response.data.user);
@@ -582,7 +582,7 @@ useEffect(() => {
   const fetchProjects = async () => {
     try {
       const response = await axios.post<Project[]>(
-        "https://legality-back-production.up.railway.app/projects/all",
+        "http://localhost:5000/projects/all",
         {
           country: user?.country_user,
         },
@@ -596,7 +596,7 @@ useEffect(() => {
             project.id_project,
           );
           const isLikedResponse = await axios.post(
-            "https://legality-back-production.up.railway.app/projects/isLiked",
+            "http://localhost:5000/projects/isLiked",
             {
               id_project: project.id_project,
               id_user: user?.id_user,
@@ -604,14 +604,14 @@ useEffect(() => {
           );
           // Ajout de la logique pour récupérer le statut de l'invitation
           const invitationStatusResponse = await axios.post(
-            "https://legality-back-production.up.railway.app/projects/invitation",
+            "http://localhost:5000/projects/invitation",
             {
               id_project: project.user_id_user,
               id_user: user?.id_user,
             },
           );
           const occupationResponse = await axios.get(
-            `https://legality-back-production.up.railway.app/users/occupation/${project.user_id_user}`
+            `http://localhost:5000/users/occupation/${project.user_id_user}`
           );
           return {
             ...project,
@@ -636,7 +636,7 @@ useEffect(() => {
                 project.comments.map(async (comment) => {
                   try {
                     const response = await axios.post(
-                      "https://legality-back-production.up.railway.app/projects/ratingPercentage",
+                      "http://localhost:5000/projects/ratingPercentage",
                       { id_comment: comment.id_comment },
                     );
                     if (response.data.success) {
@@ -682,7 +682,7 @@ useEffect(() => {
     fetchProjects();
     const handleLikeButtonClick = async (projectId: number) => {
       try {
-        const response = await axios.post(`https://legality-back-production.up.railway.app/projects/like`, {
+        const response = await axios.post(`http://localhost:5000/projects/like`, {
           id_project: projectId,
           id_user: user?.id_user,
         });
@@ -720,7 +720,7 @@ useEffect(() => {
   ): Promise<ProjectComment[]> => {
     try {
       const response = await axios.post<{ comments: ProjectComment[] }>(
-        "https://legality-back-production.up.railway.app/projects/getAllComments",
+        "http://localhost:5000/projects/getAllComments",
         { id_project: projectId },
       );
       return response.data.comments;
@@ -733,7 +733,7 @@ useEffect(() => {
   const fetchLikeCountForProject = async (projectId) => {
     try {
       const response = await axios.post(
-        "https://legality-back-production.up.railway.app/projects/liked",
+        "http://localhost:5000/projects/liked",
         { id_project: projectId },
       );
       return response.data.likeCount;
@@ -745,7 +745,7 @@ useEffect(() => {
 
   const handleSendRequest = async (projectId) => {
     try {
-      const response = await axios.post("https://legality-back-production.up.railway.app/projects/send", {
+      const response = await axios.post("http://localhost:5000/projects/send", {
         id_user: user?.id_user,
         id_project: projectId,
       });
@@ -769,7 +769,7 @@ useEffect(() => {
 
   const handleCancelRequest = async (projectId) => {
     try {
-      const response = await axios.post("https://legality-back-production.up.railway.app/projects/cancel", {
+      const response = await axios.post("http://localhost:5000/projects/cancel", {
         id_user: user?.id_user,
         id_project: projectId,
       });
@@ -844,7 +844,7 @@ useEffect(() => {
   ): Promise<number> => {
     try {
       const response = await axios.post<{ commentCount: number }>(
-        "https://legality-back-production.up.railway.app/projects/countComments",
+        "http://localhost:5000/projects/countComments",
         { id_project: projectId },
       );
       return response.data.commentCount;
@@ -899,7 +899,7 @@ useEffect(() => {
 
   const handleLikeButtonClick = async (projectId: number) => {
     try {
-      const response = await axios.post(`https://legality-back-production.up.railway.app/projects/like`, {
+      const response = await axios.post(`http://localhost:5000/projects/like`, {
         id_project: projectId,
         id_user: user?.id_user,
       });
@@ -932,7 +932,7 @@ useEffect(() => {
   const handleAddComment = async (projectId: number, comment: string) => {
     try {
       const response = await axios.post(
-        `https://legality-back-production.up.railway.app/projects/addComment`,
+        `http://localhost:5000/projects/addComment`,
         {
           id_project: projectId,
           id_user: user?.id_user,
@@ -973,7 +973,7 @@ useEffect(() => {
         // );
         // setProjects(updatedProjectsAfterCountRefresh);
         const response = await axios.post(
-          "https://legality-back-production.up.railway.app/projects/all",
+          "http://localhost:5000/projects/all",
           {
             country: user?.country_user,
            
@@ -990,7 +990,7 @@ useEffect(() => {
               project.id_project,
             );
             const isLikedResponse = await axios.post(
-              "https://legality-back-production.up.railway.app/projects/isLiked",
+              "http://localhost:5000/projects/isLiked",
               {
                 id_project: project.id_project,
                 id_user: user?.id_user,
@@ -998,7 +998,7 @@ useEffect(() => {
             );
             // Ajout de la récupération du statut de l'invitation
             const invitationResponse = await axios.post(
-              "https://legality-back-production.up.railway.app/projects/invitation",
+              "http://localhost:5000/projects/invitation",
               {
                 id_project: project.user_id_user,
                 id_user: user?.id_user,
@@ -1031,7 +1031,7 @@ useEffect(() => {
     try {
       // Send a PUT request to the update endpoint, including the comment ID in the URL path
       const response = await axios.put(
-        `https://legality-back-production.up.railway.app/projects/updateComment/${id_comment}`, // Note: The comment ID is now part of the URL
+        `http://localhost:5000/projects/updateComment/${id_comment}`, // Note: The comment ID is now part of the URL
         {
           id_project: projectId,
           id_user: user?.id_user,

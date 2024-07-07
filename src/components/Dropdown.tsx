@@ -10,7 +10,7 @@ const DropdownNotification = ({ user }) => {
   const fetchPendingInvitations = async () => {
     console.log(user);
     try {
-      const response = await axios.get('https://legality-back-production.up.railway.app/invitations/invitations', {
+      const response = await axios.get('http://localhost:5000/invitations/invitations', {
         params: { userId: user.id_user },
       });
 
