@@ -56,7 +56,7 @@ const PostForm = ({fetchProjects}) => {
     const fetchProfile = async () => {
       try {
         const response = await axios.get<{ user: User }>(
-          "https://legality-back-production.up.railway.app/users/profile",
+          "https://legality-back1-production.up.railway.app/users/profile",
           { withCredentials: true },
         );
         setUser(response.data.user);
@@ -182,7 +182,7 @@ const PostForm = ({fetchProjects}) => {
       return;
     }
     try {
-      const response = await axios.post("https://legality-back-production.up.railway.app/projects", formData);
+      const response = await axios.post("https://legality-back1-production.up.railway.app/projects", formData);
       setMessage("Post created successfully.");
       setError("");
       fetchProjects();

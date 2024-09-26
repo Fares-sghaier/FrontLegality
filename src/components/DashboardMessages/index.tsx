@@ -38,7 +38,7 @@ const DashboardMessages = () => {
   // Fonction pour créer une nouvelle conversation
   const createNewConversation = async (groupTitle: string, userId: string, otherUserId: string) => {
     try {
-      const response = await axios.post("https://legality-back-production.up.railway.app/conversation/create-new-conversation", {
+      const response = await axios.post("https://legality-back1-production.up.railway.app/conversation/create-new-conversation", {
         groupTitle,
         userId,
         otherUserId
@@ -52,7 +52,7 @@ const DashboardMessages = () => {
   // Fonction pour obtenir toutes les conversations d'un utilisateur
   const getAllConversations = async (id: string) => {
     try {
-      const response = await axios.get(`https://legality-back-production.up.railway.app/conversation/get-all-conversation/${id}`);
+      const response = await axios.get(`https://legality-back1-production.up.railway.app/conversation/get-all-conversation/${id}`);
       // Gérer la réponse et mettre à jour l'état des conversations
     } catch (error) {
       console.error(error);
@@ -62,7 +62,7 @@ const DashboardMessages = () => {
   // Fonction pour mettre à jour le dernier message d'une conversation
   const updateLastMessage = async (id: string, lastMessage: string, lastMessageId: string) => {
     try {
-      const response = await axios.put(`https://legality-back-production.up.railway.app/conversation/update-last-message/${id}`, {
+      const response = await axios.put(`https://legality-back1-production.up.railway.app/conversation/update-last-message/${id}`, {
         lastMessage,
         lastMessageId
       });
@@ -75,7 +75,7 @@ const DashboardMessages = () => {
   // Fonction pour envoyer un nouveau message
   const sendMessage = async (conversationId: string, text: string, sender: string) => {
     try {
-      const response = await axios.post("https://legality-back-production.up.railway.app/conversation/message/create-new-message", {
+      const response = await axios.post("https://legality-back1-production.up.railway.app/conversation/message/create-new-message", {
         conversationId,
         text,
         sender
@@ -89,7 +89,7 @@ const DashboardMessages = () => {
   // Fonction pour obtenir tous les messages d'une conversation
   const getAllMessages = async (id: string) => {
     try {
-      const response = await axios.get(`https://legality-back-production.up.railway.app/conversation/message/get-all-messages/${id}`);
+      const response = await axios.get(`https://legality-back1-production.up.railway.app/conversation/message/get-all-messages/${id}`);
       // Gérer la réponse et mettre à jour l'état des messages
     } catch (error) {
       console.error(error);
@@ -99,7 +99,7 @@ const DashboardMessages = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const response = await axios.get("https://legality-back-production.up.railway.app/users/profile", { withCredentials: true });
+        const response = await axios.get("https://legality-back1-production.up.railway.app/users/profile", { withCredentials: true });
         setUserProfile(response.data.user);
       } catch (error) {
         console.error(error);
@@ -132,7 +132,7 @@ const DashboardMessages = () => {
       try {
         if (user) {
           const response = await axios.get(
-            `https://legality-back-production.up.railway.app/conversation/get-all-conversation-user/${user.id_user}`,
+            `https://legality-back1-production.up.railway.app/conversation/get-all-conversation-user/${user.id_user}`,
             {
               withCredentials: true,
             }
@@ -168,7 +168,7 @@ const DashboardMessages = () => {
       try {
         if (currentChat && currentChat.id_user) {
           const response = await axios.get(
-            `https://legality-back-production.up.railway.app/conversation/message/get-all-messages/${currentChat.id_user}`
+            `https://legality-back1-production.up.railway.app/conversation/message/get-all-messages/${currentChat.id_user}`
           );
           setMessages(response.data.messages);
         }
@@ -201,7 +201,7 @@ const DashboardMessages = () => {
     try {
       if (newMessage !== "") {
         const res = await axios.post(
-          `https://legality-back-production.up.railway.app/conversation/message/create-new-message`,
+          `https://legality-back1-production.up.railway.app/conversation/message/create-new-message`,
           message
         );
         setMessages([...messages, res.data.message]);
@@ -215,7 +215,7 @@ const DashboardMessages = () => {
   const updateLastMessageForImage = async () => {
     try {
       await axios.put(
-        `https://legality-back-production.up.railway.app/conversation/update-last-message/${currentChat?.id_user}`,
+        `https://legality-back1-production.up.railway.app/conversation/update-last-message/${currentChat?.id_user}`,
         {
           lastMessage: newMessage,
           lastMessageId: user?.id_user,
@@ -253,7 +253,7 @@ const DashboardMessages = () => {
 
     try {
       const res = await axios.post(
-        `https://legality-back-production.up.railway.app/message/create-new-message`,
+        `https://legality-back1-production.up.railway.app/message/create-new-message`,
         {
           images: e,
           sender: user?.id_user,
@@ -360,7 +360,7 @@ const MessageList = ({
 
     const getUser = async () => {
       try {
-        const res = await axios.get(`https://legality-back-production.up.railway.app/user/user-info/${otherUserId}`);
+        const res = await axios.get(`https://legality-back1-production.up.railway.app/user/user-info/${otherUserId}`);
         setOtherUser(res.data.user);
       } catch (error) {
         console.log(error);

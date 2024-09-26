@@ -16,7 +16,7 @@ import Modal1 from '@/components/modal/index1';
 import Modal2 from '@/components/modal/index2';
 import { Modal } from 'antd';
 
-const socket = io('https://legality-back-production.up.railway.app');
+const socket = io('https://legality-back1-production.up.railway.app');
 
 interface Message {
   id: number;
@@ -95,7 +95,7 @@ const Chat = () => {
 
   const handleDeleteConversation = async(conversationId) =>{
     try {
-      const response = await axios.delete("https://legality-back-production.up.railway.app/messages/deleteConversation", {
+      const response = await axios.delete("https://legality-back1-production.up.railway.app/messages/deleteConversation", {
         data: {
           id: conversationId,
         },
@@ -112,7 +112,7 @@ const Chat = () => {
   };
   const handleDelete = async (messageId) => {
     try {
-      const response = await axios.delete("https://legality-back-production.up.railway.app/messages/deleteMessage", {
+      const response = await axios.delete("https://legality-back1-production.up.railway.app/messages/deleteMessage", {
         data: {
           id: messageId,
         },
@@ -136,7 +136,7 @@ const Chat = () => {
   };
   const handleSearch = async () => {
     try {
-      const response = await axios.post('https://legality-back-production.up.railway.app/messages/search-conversations', {
+      const response = await axios.post('https://legality-back1-production.up.railway.app/messages/search-conversations', {
         userId: user.id_user,
         query: searchQuery,
       });
@@ -176,7 +176,7 @@ const Chat = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const response = await axios.get('https://legality-back-production.up.railway.app/users/profile', { withCredentials: true });
+        const response = await axios.get('https://legality-back1-production.up.railway.app/users/profile', { withCredentials: true });
         setUser(response.data.user);
       } catch (error) {
         router.push('/signin');
@@ -211,7 +211,7 @@ const Chat = () => {
 
   const fetchConversations = async () => {
     try {
-      const response = await fetch('https://legality-back-production.up.railway.app/messages/get-all-conversations', {
+      const response = await fetch('https://legality-back1-production.up.railway.app/messages/get-all-conversations', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -314,7 +314,7 @@ const Chat = () => {
         return;
       }
 
-      const response = await fetch('https://legality-back-production.up.railway.app/messages/create-new-message', {
+      const response = await fetch('https://legality-back1-production.up.railway.app/messages/create-new-message', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -364,7 +364,7 @@ const Chat = () => {
 
   const handleSearchMessage = async () => {
     try {
-      const response = await axios.post('https://legality-back-production.up.railway.app/messages/searchMessageInConversation', {
+      const response = await axios.post('https://legality-back1-production.up.railway.app/messages/searchMessageInConversation', {
         conversationId: selectedConversation,
         searchText: searchText,
       });

@@ -17,7 +17,7 @@ const Profile = () => {
     handleResize();
     const fetchProfile = async () => {
       try {
-        const response = await axios.get('https://legality-back-production.up.railway.app/users/profile', { withCredentials: true });
+        const response = await axios.get('https://legality-back1-production.up.railway.app/users/profile', { withCredentials: true });
         setUser(response.data.user);
       } catch (error) {
         router.push('/signin');

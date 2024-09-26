@@ -12,7 +12,7 @@ const ActivationPage = () => {
       const activation_token = router.query.activation_token as string;
       if (activation_token) {
         try {
-          const response = await axios.post('https://legality-back-production.up.railway.app/users/activation', { activation_token });
+          const response = await axios.post('https://legality-back1-production.up.railway.app/users/activation', { activation_token });
           const data = response.data;
           setMessage(data.message);
         } catch (error) {
@@ -30,7 +30,7 @@ const ActivationPage = () => {
   useEffect(() => {
     const checkTokenExpiration = async () => {
       try {
-        await axios.post('https://legality-back-production.up.railway.app/users/checktokenexpirationactivation', { token }); // Endpoint pour vérifier l'expiration du token
+        await axios.post('https://legality-back1-production.up.railway.app/users/checktokenexpirationactivation', { token }); // Endpoint pour vérifier l'expiration du token
       } catch (error) {
         // Si le token est expiré, rediriger vers la page expired_reset_password
         router.push('https://front-legality.vercel.app/expired_activation_account');

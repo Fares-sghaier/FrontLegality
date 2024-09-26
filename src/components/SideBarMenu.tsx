@@ -41,7 +41,7 @@ const handleOpenModal = () => {
 
   const handleLogout = async () => {
     try {
-      await axios.post('https://legality-back-production.up.railway.app/users/logout', {}, { withCredentials: true });
+      await axios.post('https://legality-back1-production.up.railway.app/users/logout', {}, { withCredentials: true });
       document.cookie = 'jwt=; path=/; expires=Thu, 01 Jan 3000 00:00:00 GMT';
       router.push('/signin');
     } catch (error) {
